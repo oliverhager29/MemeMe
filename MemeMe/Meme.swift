@@ -7,13 +7,13 @@
 //
 import UIKit
 
-/// Meme data
-class Meme {
+/// Meme data (serializable)
+class Meme: NSObject {
     /// top text
     var topText: String!
     
     /// bottom text
-    var bottomText: String
+    var bottomText: String!
     
     /// image!
     var image: UIImage!
@@ -27,5 +27,23 @@ class Meme {
         self.bottomText = bottomText
         self.image = image
         self.memedImage = memedImage
+    }
+    
+    /// offer initializer for deserializing Meme object
+    /// :param: aDecoder deserializer
+    required init(coder aDecoder: NSCoder) {
+        topText = aDecoder.decodeObjectForKey("topText") as! String
+        bottomText = aDecoder.decodeObjectForKey("bottomText") as! String
+        image = aDecoder.decodeObjectForKey("image") as! UIImage
+        memedImage = aDecoder.decodeObjectForKey("memedImage") as! UIImage
+    }
+    
+    /// offer initializer for serializing Meme object
+    /// :param: aCoder serializer
+    func encodeWithCoder(aCoder: NSCoder!) {
+        aCoder.encodeObject(topText, forKey: "topText")
+        aCoder.encodeObject(bottomText, forKey: "bottomText")
+        aCoder.encodeObject(image, forKey: "image")
+        aCoder.encodeObject(memedImage, forKey: "memedImage")
     }
 }

@@ -73,12 +73,17 @@
                                 <action selector="shareMeme:" destination="vXZ-lx-hvc" id="3J1-vm-DZU"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="pLX-bJ-OZm"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="pLX-bJ-OZm">
+                            <connections>
+                                <action selector="pressCancelButton:" destination="vXZ-lx-hvc" id="sFd-GV-VId"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="bottomTextField" destination="l9C-Lr-gLV" id="JIk-7y-gYN"/>
                         <outlet property="bottomToolbar" destination="AsU-li-LPP" id="4rt-HW-EOS"/>
                         <outlet property="cameraButton" destination="P3x-vW-bOY" id="kup-hb-qQQ"/>
+                        <outlet property="cancelButton" destination="pLX-bJ-OZm" id="s1x-gU-2aA"/>
                         <outlet property="imageView" destination="k0J-7i-maC" id="TaN-Rx-ZS9"/>
                         <outlet property="shareButton" destination="EYA-yV-3Gf" id="7Yd-ag-VvQ"/>
                         <outlet property="topTextField" destination="qyG-1g-QAC" id="e4o-QT-UOw"/>
@@ -251,25 +256,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="136" height="154"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dir-ft-Ejp">
-                                                    <rect key="frame" x="22" y="70" width="106" height="76"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dir-ft-Ejp">
+                                                    <rect key="frame" x="0.0" y="0.0" width="136" height="154"/>
                                                 </imageView>
-                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k6f-ID-ptW">
-                                                    <rect key="frame" x="50" y="8" width="52" height="50"/>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k6f-ID-ptW">
+                                                    <rect key="frame" x="0.0" y="0.0" width="52" height="50"/>
                                                     <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
                                                     <state key="normal" image="delete"/>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <constraints>
-                                            <constraint firstItem="dir-ft-Ejp" firstAttribute="trailing" secondItem="Y9Y-qm-gT4" secondAttribute="trailingMargin" id="4Dl-a5-eLv"/>
-                                            <constraint firstItem="k6f-ID-ptW" firstAttribute="top" secondItem="Y9Y-qm-gT4" secondAttribute="topMargin" id="DPy-jF-Tlw"/>
-                                            <constraint firstItem="dir-ft-Ejp" firstAttribute="top" secondItem="k6f-ID-ptW" secondAttribute="bottom" constant="12" id="R5z-au-NX5"/>
-                                            <constraint firstItem="dir-ft-Ejp" firstAttribute="leading" secondItem="Y9Y-qm-gT4" secondAttribute="leadingMargin" constant="14" id="cBJ-aq-bzw"/>
-                                            <constraint firstItem="dir-ft-Ejp" firstAttribute="bottom" secondItem="Y9Y-qm-gT4" secondAttribute="bottomMargin" id="fDN-E1-xze"/>
-                                            <constraint firstItem="dir-ft-Ejp" firstAttribute="centerX" secondItem="k6f-ID-ptW" secondAttribute="centerX" constant="28" id="x9h-cR-glH"/>
-                                        </constraints>
                                         <connections>
                                             <outlet property="deleteButton" destination="k6f-ID-ptW" id="kQ0-BM-rOB"/>
                                             <outlet property="memeImageView" destination="dir-ft-Ejp" id="kWt-sR-y2H"/>

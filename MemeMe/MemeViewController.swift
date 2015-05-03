@@ -28,6 +28,9 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     /// memed image (i.e. image with top and bottom label)
     var memedImage: UIImage!
     
+    /// is initial entry
+    var isInitialEntry = true
+    
     /// top text field
     @IBOutlet weak var topTextField: UITextField!
     
@@ -36,6 +39,9 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     
     /// share button
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    
+    /// cancel button
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     /// camera button
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -89,6 +95,12 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         performSegueWithIdentifier("sentMemes", sender: self)
         saveSentMeme()
     }
+    
+    /// if the cancel button has been pressed then go to Sent Memes page (table view)
+    @IBAction func pressCancelButton(sender: UIBarButtonItem) {
+        performSegueWithIdentifier("sentMemes", sender: self)
+    }
+    
 
     /// initialize Meme editor
     /// :params: animated
@@ -120,6 +132,10 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         tabBarController?.navigationItem.title = ""
         tabBarController?.navigationItem.rightBarButtonItem = emptyButton
         tabBarController?.navigationController?.navigationBar.hidden = true
+        // if there are already store Memes then navigate to the Sent Meme page (table view)
+        if(appDelegate.memes.count > 0 && isInitialEntry) {
+            performSegueWithIdentifier("sentMemes", sender: self)
+        }
     }
     
     /// unsubscribe from keyboard notifications

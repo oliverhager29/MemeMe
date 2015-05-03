@@ -121,5 +121,9 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDataSource
             let controller = segue.destinationViewController as! MemeDetailViewController
             controller.meme = currentMeme
         }
+        else if(segue.identifier == "add") {
+            let controller = segue.destinationViewController as! MemeViewController
+            controller.isInitialEntry = false
+        }
     }
 }
