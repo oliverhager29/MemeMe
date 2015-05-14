@@ -23,13 +23,15 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDataSource
     /// :param: animated
     override func viewWillAppear(animated: Bool) {
         let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "add")
-        tabBarController?.navigationItem.rightBarButtonItem = addButton
+        if let tabBarController = tabBarController {
+            tabBarController.navigationItem.rightBarButtonItem = addButton
         
-        let editButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Edit, target: self, action: "edit")
-        tabBarController?.navigationItem.leftBarButtonItem = editButton
+            let editButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Edit, target: self, action: "edit")
+            tabBarController.navigationItem.leftBarButtonItem = editButton
         
-        tabBarController?.navigationItem.title = "Sent Memes"
-        tabBarController?.navigationController?.navigationBar.hidden = false
+            tabBarController.navigationItem.title = "Sent Memes"
+            tabBarController.navigationController?.navigationBar.hidden = false
+        }
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
         allMemes = appDelegate.memes
@@ -62,8 +64,8 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDataSource
         editMode = !editMode
         if(editMode == true) {
             for item in myCollectionView!.visibleCells() as [AnyObject] {
-                var indexPath: NSIndexPath = myCollectionView!.indexPathForCell(item as! MemeCollectionViewCell)!
-                var cell: MemeCollectionViewCell = myCollectionView.cellForItemAtIndexPath(indexPath) as! MemeCollectionViewCell
+                let indexPath: NSIndexPath = myCollectionView!.indexPathForCell(item as! MemeCollectionViewCell)!
+                let cell: MemeCollectionViewCell = myCollectionView.cellForItemAtIndexPath(indexPath) as! MemeCollectionViewCell
                 cell.deleteButton.hidden = false
                 cell.deleteButton.layer.setValue(indexPath.row, forKey: "index")
                 cell.deleteButton.addTarget(self, action: "deleteButton:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -71,8 +73,8 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDataSource
         }
         else {
             for item in myCollectionView!.visibleCells() as [AnyObject] {
-                var indexPath: NSIndexPath = myCollectionView.indexPathForCell(item as! MemeCollectionViewCell)!
-                var cell: MemeCollectionViewCell = myCollectionView!.cellForItemAtIndexPath(indexPath) as! MemeCollectionViewCell
+                let indexPath: NSIndexPath = myCollectionView.indexPathForCell(item as! MemeCollectionViewCell)!
+                let cell: MemeCollectionViewCell = myCollectionView!.cellForItemAtIndexPath(indexPath) as! MemeCollectionViewCell
                 cell.deleteButton.hidden = true
             }
         }

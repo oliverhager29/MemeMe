@@ -85,8 +85,9 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         }
         // Add it to the memes array in the Application Delegate
         let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as! AppDelegate
-        appDelegate.memes.append(meme)
+        if let appDelegate = object as? AppDelegate {
+            appDelegate.memes.append(meme)
+        }
     }
     
     /// after share activity has been completed the Meme shall be saved and the sent Memes shall be displayed
@@ -128,10 +129,12 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         tabBarController?.tabBar.hidden = true
         navigationController?.navigationBar.hidden = false
         let emptyButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: navigationController, action: nil)
-        tabBarController?.navigationItem.leftBarButtonItem = emptyButton
-        tabBarController?.navigationItem.title = ""
-        tabBarController?.navigationItem.rightBarButtonItem = emptyButton
-        tabBarController?.navigationController?.navigationBar.hidden = true
+        if let tabBarController = tabBarController {
+            tabBarController.navigationItem.leftBarButtonItem = emptyButton
+            tabBarController.navigationItem.title = ""
+            tabBarController.navigationItem.rightBarButtonItem = emptyButton
+            tabBarController.navigationController?.navigationBar.hidden = true
+        }
         // if there are already store Memes then navigate to the Sent Meme page (table view)
         if(appDelegate.memes.count > 0 && isInitialEntry) {
             performSegueWithIdentifier("sentMemes", sender: self)
@@ -245,8 +248,12 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     /// :return: memed image (i.e. image with top and bottom text)
     func generateMemedImage() -> UIImage {
         // Hide toolbar and navbar
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        bottomToolbar?.hidden = true
+        if let navigationController = navigationController {
+            navigationController.setNavigationBarHidden(true, animated: true)
+        }
+        if let bottomToolbar = bottomToolbar {
+            bottomToolbar.hidden = true
+        }
         // Render view to an image
         UIGraphicsBeginImageContext(view.frame.size)
         view.drawViewHierarchyInRect(view.frame,
@@ -255,8 +262,12 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         // Show toolbar and navbar
-        bottomToolbar?.hidden = false
-        navigationController?.setNavigationBarHidden(false, animated: true)
+        if let bottomToolbar = bottomToolbar {
+            bottomToolbar.hidden = false
+        }
+        if let navigationController = navigationController {
+            navigationController.setNavigationBarHidden(false, animated: true)
+        }
         return memedImage
     }
 }

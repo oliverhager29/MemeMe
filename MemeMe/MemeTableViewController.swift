@@ -21,17 +21,15 @@ class MemeTableViewController: UIViewController, UITableViewDataSource {
     /// customize edit and add button in navigation bar
     /// :param: animated
     override func viewWillAppear(animated: Bool) {
-        //let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: navigationController, action: nil)
-        //tabBarController?.navigationItem.leftBarButtonItem = backButton
-        
-        
         let editButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Edit, target: self, action: "edit")
-        tabBarController?.navigationItem.leftBarButtonItem = editButton
+        if let tabBarController = tabBarController {
+            tabBarController.navigationItem.leftBarButtonItem = editButton
         
-        let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "add")
-        tabBarController?.navigationItem.rightBarButtonItem = addButton
-        tabBarController?.navigationItem.title = "Sent Memes"
-        tabBarController?.navigationController?.navigationBar.hidden = false
+            let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "add")
+            tabBarController.navigationItem.rightBarButtonItem = addButton
+            tabBarController.navigationItem.title = "Sent Memes"
+            tabBarController.navigationController?.navigationBar.hidden = false
+        }
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
         allMemes = appDelegate.memes
@@ -75,30 +73,36 @@ class MemeTableViewController: UIViewController, UITableViewDataSource {
         let meme = allMemes[indexPath.row]
         
         // Set the name and image
-        cell.textLabel?.text = "\(meme.topText)...\(meme.bottomText)"
-        cell.imageView?.image = meme.memedImage
-        
+        if let textLabel = cell.textLabel {
+            textLabel.text = "\(meme.topText)...\(meme.bottomText)"
+        }
+        if let imageView = cell.imageView {
+            imageView.image = meme.memedImage
+        }
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         myTableView = tableView
         let detailController = storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController")! as! MemeDetailViewController
-        println("row: \(indexPath.row)")
         detailController.meme = allMemes[indexPath.row]
         currentMeme = allMemes[indexPath.row]
-        detailController.tabBarController?.hidesBottomBarWhenPushed=true
+        if let tabBarController = detailController.tabBarController {
+            tabBarController.hidesBottomBarWhenPushed=true
+        }
         performSegueWithIdentifier("showDetails", sender: detailController)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "showDetails") {
-            let controller = segue.destinationViewController as! MemeDetailViewController
-            controller.meme = currentMeme
+            if let controller = segue.destinationViewController as? MemeDetailViewController {
+                controller.meme = currentMeme
+            }
         }
         else if(segue.identifier == "add") {
-            let controller = segue.destinationViewController as! MemeViewController
-            controller.isInitialEntry = false
+            if let controller = segue.destinationViewController as? MemeViewController {
+                controller.isInitialEntry = false
+            }
         }
     }
     

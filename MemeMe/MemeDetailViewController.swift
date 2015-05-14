@@ -19,13 +19,17 @@ class MemeDetailViewController: UIViewController {
     /// :param: animated
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        imageView!.image = meme.memedImage
+        if let imageView = imageView {
+            imageView.image = meme.memedImage
+        }
         let backButton = UIBarButtonItem(title: "＜Sent Memes", style: UIBarButtonItemStyle.Plain, target: self, action: "goBack")
-        tabBarController?.navigationItem.leftBarButtonItem = backButton
-        tabBarController?.navigationItem.title = ""
+        if let tabBarController = tabBarController {
+            tabBarController.navigationItem.leftBarButtonItem = backButton
+            tabBarController.navigationItem.title = ""
         
-        let emptyButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: navigationController, action: nil)
-        tabBarController?.navigationItem.rightBarButtonItem = emptyButton
+            let emptyButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: navigationController, action: nil)
+            tabBarController.navigationItem.rightBarButtonItem = emptyButton
+        }
     }
     
     /// navigate back to the collection/table view
@@ -38,18 +42,6 @@ class MemeDetailViewController: UIViewController {
     func editMeme(sender: UIBarButtonItem) {
         performSegueWithIdentifier("editMeme", sender: self)
     }
-    
-//    func deleteMeme(sender: UIBarButtonItem) {
-//        let object = UIApplication.sharedApplication().delegate
-//        let appDelegate = object as! AppDelegate
-//        var allMemes = appDelegate.memes
-//        var index = (allMemes as NSArray).indexOfObject(meme)
-//        if(index >= 0) {
-//            allMemes.removeAtIndex(index)
-//            appDelegate.memes = allMemes
-//            dismissViewControllerAnimated(true, completion: nil)
-//        }
-//    }
     
     /// set Meme to edit
     /// :param: segue
