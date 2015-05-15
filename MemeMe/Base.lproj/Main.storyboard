@@ -39,7 +39,7 @@
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <items>
-                                    <barButtonItem title="Camera" systemItem="camera" id="P3x-vW-bOY">
+                                    <barButtonItem systemItem="camera" id="P3x-vW-bOY">
                                         <connections>
                                             <action selector="pickAnImageFromCamera:" destination="vXZ-lx-hvc" id="429-8w-Eug"/>
                                         </connections>
@@ -62,6 +62,7 @@
                             <constraint firstItem="k0J-7i-maC" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="-64" id="XAd-i0-9bf"/>
                             <constraint firstItem="qyG-1g-QAC" firstAttribute="height" secondItem="l9C-Lr-gLV" secondAttribute="height" id="Zsa-UG-DKd"/>
                             <constraint firstItem="AsU-li-LPP" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="bBi-ah-bRO"/>
+                            <constraint firstAttribute="centerX" secondItem="k0J-7i-maC" secondAttribute="centerX" id="fpz-AP-IfC"/>
                             <constraint firstItem="qyG-1g-QAC" firstAttribute="width" secondItem="l9C-Lr-gLV" secondAttribute="width" id="joV-pP-efw"/>
                             <constraint firstAttribute="centerX" secondItem="AsU-li-LPP" secondAttribute="centerX" id="lPm-mG-f9X"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qyG-1g-QAC" secondAttribute="trailing" constant="1" id="tKO-9y-p1K"/>
@@ -69,7 +70,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="iLD-aX-gEK">
-                        <barButtonItem key="leftBarButtonItem" title="Share" systemItem="action" id="EYA-yV-3Gf">
+                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="EYA-yV-3Gf">
                             <connections>
                                 <action selector="shareMeme:" destination="vXZ-lx-hvc" id="3J1-vm-DZU"/>
                             </connections>
@@ -88,7 +89,7 @@
                         <outlet property="imageView" destination="k0J-7i-maC" id="TaN-Rx-ZS9"/>
                         <outlet property="shareButton" destination="EYA-yV-3Gf" id="7Yd-ag-VvQ"/>
                         <outlet property="topTextField" destination="qyG-1g-QAC" id="e4o-QT-UOw"/>
-                        <segue destination="qxN-rj-IHl" kind="push" identifier="sentMemes" id="g3b-Gn-DAC"/>
+                        <segue destination="qxN-rj-IHl" kind="show" identifier="sentMemes" id="g3b-Gn-DAC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -241,7 +242,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pa8-1Q-pkj">
-                                <rect key="frame" x="11" y="9" width="600" height="600"/>
+                                <rect key="frame" x="-5" y="0.0" width="605" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="3" minimumInteritemSpacing="2" id="Kuu-Jj-OgE">
                                     <size key="itemSize" width="136" height="154"/>
@@ -341,8 +342,8 @@
         <image name="delete" width="52" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mxp-ei-ob6"/>
-        <segue reference="u4p-Hs-U4Q"/>
         <segue reference="kpG-yU-Tmu"/>
+        <segue reference="u4p-Hs-U4Q"/>
+        <segue reference="mxp-ei-ob6"/>
     </inferredMetricsTieBreakers>
 </document>
