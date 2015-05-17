@@ -314,13 +314,33 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bHj-Jq-RIl">
                                 <rect key="frame" x="0.0" y="64" width="600" height="498"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZMQ-c8-5g9">
+                                <rect key="frame" x="8" y="26" width="30" height="30"/>
+                                <state key="normal" title="Delete"/>
+                                <connections>
+                                    <action selector="deleteMeme:" destination="fSA-00-xcl" eventType="touchUpInside" id="KPW-jS-rFZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uUc-lx-Irx">
+                                <rect key="frame" x="64" y="26" width="46" height="30"/>
+                                <state key="normal" title="Edit">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="vXZ-lx-hvc" kind="show" identifier="editMeme" id="rBk-Ug-8dT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="bHj-Jq-RIl" firstAttribute="top" secondItem="12J-zp-Gbw" secondAttribute="bottom" id="C4a-fn-FN7"/>
-                            <constraint firstItem="bHj-Jq-RIl" firstAttribute="leading" secondItem="yZA-oT-aDB" secondAttribute="leading" id="LQB-Fd-kAn"/>
-                            <constraint firstAttribute="trailing" secondItem="bHj-Jq-RIl" secondAttribute="trailing" id="eFc-2u-PCy"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="bHj-Jq-RIl" secondAttribute="bottom" constant="38" id="oWm-hg-YRI"/>
+                            <constraint firstItem="bHj-Jq-RIl" firstAttribute="leading" secondItem="yZA-oT-aDB" secondAttribute="leading" id="3bb-IZ-gXh"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="bHj-Jq-RIl" secondAttribute="bottom" constant="38" id="LnE-Bq-6yE"/>
+                            <constraint firstItem="bHj-Jq-RIl" firstAttribute="top" secondItem="ZMQ-c8-5g9" secondAttribute="bottom" constant="8" id="P7T-ct-1yQ"/>
+                            <constraint firstAttribute="trailing" secondItem="bHj-Jq-RIl" secondAttribute="trailing" id="RN2-sg-582"/>
+                            <constraint firstItem="ZMQ-c8-5g9" firstAttribute="leading" secondItem="yZA-oT-aDB" secondAttribute="leadingMargin" constant="-8" id="b5F-xd-DXK"/>
+                            <constraint firstItem="uUc-lx-Irx" firstAttribute="leading" secondItem="ZMQ-c8-5g9" secondAttribute="trailing" constant="26" id="iVP-VN-6jP"/>
+                            <constraint firstItem="ZMQ-c8-5g9" firstAttribute="centerY" secondItem="uUc-lx-Irx" secondAttribute="centerY" id="o6Q-sD-R3Q"/>
+                            <constraint firstItem="bHj-Jq-RIl" firstAttribute="top" secondItem="12J-zp-Gbw" secondAttribute="bottom" id="tgD-hI-oML"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -342,8 +362,8 @@
         <image name="delete" width="52" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kpG-yU-Tmu"/>
+        <segue reference="rBk-Ug-8dT"/>
         <segue reference="u4p-Hs-U4Q"/>
-        <segue reference="mxp-ei-ob6"/>
+        <segue reference="kpG-yU-Tmu"/>
     </inferredMetricsTieBreakers>
 </document>

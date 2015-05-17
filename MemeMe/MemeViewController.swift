@@ -15,7 +15,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     
     /// Meme to create/edit
     var meme: Meme! = nil
-    
+    var isEditMode = false
     /// in bottom text field
     var inBottomTextField = false
     
@@ -86,7 +86,9 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         // Add it to the memes array in the Application Delegate
         let object = UIApplication.sharedApplication().delegate
         if let appDelegate = object as? AppDelegate {
-            appDelegate.memes.append(meme)
+            if(!isEditMode) {
+                appDelegate.memes.append(meme)
+            }
         }
     }
     
@@ -99,9 +101,25 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     
     /// if the cancel button has been pressed then go to Sent Memes page (table view)
     @IBAction func pressCancelButton(sender: UIBarButtonItem) {
+        if(isEditMode) {
+            memedImage = generateMemedImage()
+            saveSentMeme()
+        }
         performSegueWithIdentifier("sentMemes", sender: self)
     }
     
+    override func viewDidLoad() {
+        // if there are already store Memes then navigate to the Sent Meme page (table view)
+        let object = UIApplication.sharedApplication().delegate
+        let appDelegate = object as! AppDelegate
+        if(appDelegate.memes.count > 0 && isInitialEntry) {
+            isInitialEntry = false
+            performSegueWithIdentifier("sentMemes", sender: self)
+        }
+        else {
+            isInitialEntry = false
+        }
+    }
 
     /// initialize Meme editor
     /// :params: animated
@@ -134,10 +152,6 @@ UINavigationControllerDelegate, UITextFieldDelegate {
             tabBarController.navigationItem.title = ""
             tabBarController.navigationItem.rightBarButtonItem = emptyButton
             tabBarController.navigationController?.navigationBar.hidden = true
-        }
-        // if there are already store Memes then navigate to the Sent Meme page (table view)
-        if(appDelegate.memes.count > 0 && isInitialEntry) {
-            performSegueWithIdentifier("sentMemes", sender: self)
         }
     }
     

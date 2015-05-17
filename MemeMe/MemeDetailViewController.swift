@@ -43,6 +43,20 @@ class MemeDetailViewController: UIViewController {
         performSegueWithIdentifier("editMeme", sender: self)
     }
     
+    /// delete Meme
+    /// :param: sender pressed delete button
+    @IBAction func deleteMeme(sender: UIButton) {
+        let object = UIApplication.sharedApplication().delegate
+        let appDelegate = object as! AppDelegate
+        var allMemes = appDelegate.memes
+        var index = (allMemes as NSArray).indexOfObject(meme)
+        if(index >= 0) {
+            allMemes.removeAtIndex(index)
+            appDelegate.memes = allMemes
+            goBack()
+        }
+    }
+
     /// set Meme to edit
     /// :param: segue
     /// :param: sender
@@ -50,6 +64,9 @@ class MemeDetailViewController: UIViewController {
         if(segue.identifier == "editMeme") {
             let controller = segue.destinationViewController as! MemeViewController
             controller.meme = meme
+            controller.isInitialEntry = false
+            controller.enableShareButton = true
+            controller.isEditMode = true
         }
     }
 }
