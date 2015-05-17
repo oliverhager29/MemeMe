@@ -58,8 +58,8 @@ class MemeDetailViewController: UIViewController {
     }
 
     /// set Meme to edit
-    /// :param: segue
-    /// :param: sender
+    /// :param: segue segue
+    /// :param: sender sender
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "editMeme") {
             let controller = segue.destinationViewController as! MemeViewController

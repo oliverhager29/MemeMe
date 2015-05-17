@@ -37,6 +37,9 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     /// bottom text field
     @IBOutlet weak var bottomTextField: UITextField!
     
+    /// crop button
+    @IBOutlet weak var cropButton: UIBarButtonItem!
+    
     /// share button
     @IBOutlet weak var shareButton: UIBarButtonItem!
     
@@ -139,6 +142,8 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         topTextField.delegate = self
         bottomTextField.delegate = self
         shareButton.enabled = enableShareButton
+        cropButton.enabled = enableShareButton
+        
         if(meme != nil) {
             topTextField.text = meme.topText
             bottomTextField.text = meme.bottomText
@@ -257,7 +262,6 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         return true
     }
     
-    
     /// generate memed image by hiding the top and bottom bar and making a screen shot
     /// :return: memed image (i.e. image with top and bottom text)
     func generateMemedImage() -> UIImage {
@@ -284,4 +288,43 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         }
         return memedImage
     }
+    
+    /// crop image
+    /// :param: sender crop button pressed
+    @IBAction func cropImage(sender: UIBarButtonItem) {
+        if let image = imageView.image {
+            imageView.image = squareCrop(image: image)
+        }
+    }
+    
+    /// square crop image
+    /// :param: imageToCrop image to crop
+    /// :return: image
+    func squareCrop(image imageToCrop: UIImage) -> UIImage {
+        // create copy of passed image
+        let contextImage: UIImage = UIImage(CGImage: imageToCrop.CGImage)!
+        let contextSize: CGSize = contextImage.size
+        let posX: CGFloat
+        let posY: CGFloat
+        let width: CGFloat
+        let height: CGFloat
+        // determine rectangle's top-left croner position, width and height with side length equals smallest side of the passed image
+        if contextSize.width > contextSize.height {
+            posX = ((contextSize.width - contextSize.height) / 2)
+            posY = 0
+            width = contextSize.height
+            height = contextSize.height
+        } else {
+            posX = 0
+            posY = ((contextSize.height - contextSize.width) / 2)
+            width = contextSize.width
+            height = contextSize.width
+        }
+        let rectangle: CGRect = CGRectMake(posX, posY, width, height)
+        // cut ouf rectangle for cropped image
+        let imageRef: CGImageRef = CGImageCreateWithImageInRect(contextImage.CGImage, rectangle)
+        let image: UIImage = UIImage(CGImage: imageRef, scale: imageToCrop.scale, orientation: imageToCrop.imageOrientation)!
+        return image
+    }
+
 }
